@@ -9,7 +9,7 @@
 
 <script>
 import Navbar from './Navbar';
-import auth from '../../auth';
+import auth from '../../auth'
 
 export default {
   name: 'dashboard',
