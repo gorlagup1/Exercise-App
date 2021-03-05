@@ -141,7 +141,7 @@ export default new Router({
       name: 'AllUsersView',
       component: AllUsers,
     },
-    ],
+    ], 
   },
   {
     path: '*',
