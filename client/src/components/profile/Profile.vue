@@ -148,7 +148,7 @@
   .img-style {
     width: 120px;
     height: 130px;
-    margin: 10px auto !important;
+    margin: 10px auto !important; 
   }
   .btn-block {
     display: block;
