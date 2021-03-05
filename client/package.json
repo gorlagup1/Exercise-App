@@ -55,5 +55,9 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "## Project setup ``` npm install ```",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

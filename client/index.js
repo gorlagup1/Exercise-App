@@ -1,11 +1,4 @@
-const express = require("express");
-const app = express();
-let port = process.env.PORT || 3000;
-
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
-
-app.listen(port, () => {
-    console.log('Example app is listening on port http://localhost:${port}');
+const port = process.env.PORT || 3000;
+applicationCache.addEventListener(port, function () {
+    console.log("Server started successfully");
 });
