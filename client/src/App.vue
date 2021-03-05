@@ -352,7 +352,7 @@
     background-color: #86f4ee;
     width: 80%;
   }
-  .app_logo {
+  .app_logo { 
     display: block;
     margin-left: auto;
     margin-right: auto;
