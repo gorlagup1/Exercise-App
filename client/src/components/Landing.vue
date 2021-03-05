@@ -108,7 +108,7 @@
     text-align: center !important;
   }
   .galary {
-    padding: 20px !important;
+    padding: 20px !important; 
     text-align: center !important;
     width: 80%;
     position: relative;
