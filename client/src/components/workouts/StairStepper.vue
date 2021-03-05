@@ -14,7 +14,7 @@
         bgImg: {
           backgroundImage: `url(${require('@/assets/stairstepper.jpg')})`
         },
-        iconImg: require('@/assets/workout/stairstepper.png'),
+        iconImg: require('@/assets/workout/stairstepper.png'), 
         keyType: "stairstepper",
         workoutTitle: 'Stair Stepper',
       }

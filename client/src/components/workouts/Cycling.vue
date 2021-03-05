@@ -17,7 +17,7 @@
         },
         iconImg: require('@/assets/workout/cycling.jpg'),
         keyType: "cycling",
-        workoutTitle: 'Cycling',
+        workoutTitle: 'Cycling', 
       };
     }
   };

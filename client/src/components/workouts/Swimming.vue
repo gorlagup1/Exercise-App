@@ -14,7 +14,7 @@
         bgImg: {
           backgroundImage: `url(${require('@/assets/swimming.jpg')})`
         },
-        iconImg: require('@/assets/workout/swimming.png'),
+        iconImg: require('@/assets/workout/swimming.png'), 
         keyType: "swimming",
         workoutTitle: 'Swimming',
       }

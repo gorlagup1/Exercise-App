@@ -15,7 +15,7 @@
           backgroundImage: `url(${require('@/assets/yoga.jpg')})`
         },
         iconImg: require('@/assets/workout/yoga.png'),
-        keyType: "yoga",
+        keyType: "yoga", 
         workoutTitle: 'Yoga',
       }
     }

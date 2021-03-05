@@ -15,7 +15,7 @@
         bgImg: {
           backgroundImage: `url(${require('@/assets/landing/inspirational-thoughts.jpg')})`
         },
-        iconImg: require('@/assets/workout/hiking.jpg'),
+        iconImg: require('@/assets/workout/hiking.jpg'), 
         keyType: "hiking",
         workoutTitle: 'Hiking',
       }

@@ -17,7 +17,7 @@
         },
         iconImg: require('@/assets/workout/rower.jpg'),
         keyType: "rower",
-        workoutTitle: 'Rower',
+        workoutTitle: 'Rower', 
       };
     }
   };

@@ -16,7 +16,7 @@
         },
         iconImg: require('@/assets/workout/walking-logo.jpg'),
         keyType: "walking",
-        workoutTitle: 'Walking',
+        workoutTitle: 'Walking', 
       }
     }
   };

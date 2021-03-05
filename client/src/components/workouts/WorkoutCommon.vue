@@ -257,7 +257,7 @@
       }
     }
   };
-</script>
+</script> 
 
 <style>
   .width-200 {
