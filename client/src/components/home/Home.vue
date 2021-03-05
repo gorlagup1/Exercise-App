@@ -212,7 +212,7 @@ export default {
 }
 
 .border {
-	border: 1px solid gray;
+	border: 1px solid gray; 
 }
 .item {
 	margin-left: 150px;
