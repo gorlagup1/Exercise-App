@@ -131,7 +131,7 @@
           .catch((err) => {
             window.$('.modal').modal('hide');
             self.$toastr.error(err, "Error while updating workouts!");
-          });
+          }); 
         }
       }
     };

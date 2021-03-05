@@ -128,7 +128,7 @@
           self.$toastr.success("exercise added.");
           self.clearExercise();
         })
-        .catch((err) => {
+        .catch((err) => { 
           window.$('.modal').modal('hide');
           self.$toastr.error(err, "Error while updating workouts!");
         });
