@@ -130,7 +130,7 @@ export default {
 
   .item {
     margin-top: 10px;
-    position: relative;
+    position: relative; 
   }
   .img-friend{
     width: 100px;
