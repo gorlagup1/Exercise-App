@@ -72,7 +72,7 @@
       userData() {
         return auth.getUser();
       },
-      profilePic() {
+      profilePic() {  
       },
     },
     methods: {

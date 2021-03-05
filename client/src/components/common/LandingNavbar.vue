@@ -18,7 +18,7 @@
 
 <style scoped>
   img {
-    width: auto;
+    width: auto;  
     height: 164px;
   }
   .border {

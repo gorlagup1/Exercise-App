@@ -6,7 +6,7 @@
         <p>
           This is not the web page you are looking for.
         </p>
-      </div>
+      </div>  
     </div>
   </div>
 </template>
