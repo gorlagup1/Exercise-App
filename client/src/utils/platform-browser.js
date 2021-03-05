@@ -29,7 +29,7 @@ export default (function addPlatformClass() {
   if (isBrowserOs.blackBerry()) { htmlClass = 'blackberry'; }
 
   // Browser
-  if (isBrowserOs.chrome()) { htmlClass = `${htmlClass} chrome`; }
+  if (isBrowserOs.chrome()) { htmlClass = `${htmlClass} chrome`; } 
   if (isBrowserOs.firefox()) { htmlClass = `${htmlClass} firefox`; }
   if (isBrowserOs.ie()) { htmlClass = `${htmlClass} ie`; }
   if (isBrowserOs.opera()) { htmlClass = `${htmlClass} opera`; }
