@@ -34,7 +34,8 @@
                 Gender :
               <label class="radio-inline" >
                 
-                <input type="radio" :selected="user.gender == 'male'" v-model="user.gender" value="male"> Male
+                <input type="radio" :selected="user.gender == 'male'" v-model="user.gender" value="male"> Male 
+              
               </label>
               <label class="radio-inline">
                 
