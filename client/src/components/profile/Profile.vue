@@ -34,12 +34,12 @@
                 Gender :
               <label class="radio-inline" >
                 
-                <input type="radio" :selected="user.gender == 'male'" v-model="user.gender" value="male"> Male 
+                <input type="radio" :selected="user.gender == 'male'" v-model="user.gender" value=male> Male 
               
               </label>
               <label class="radio-inline">
                 
-                <input type="radio" :selected="user.gender == 'female'" v-model="user.gender" value="female"> Female
+                <input type="radio" :selected="user.gender == 'female'" v-model="user.gender" value=female> Female
               </label>
             </div>
             <div class="form-group">
@@ -159,5 +159,10 @@
     display: block;
     width: 100%;
     text-align: left;
+  }
+  .form-group{
+    color:black;
+    text-decoration-color: black;
+  
   }
 </style>
