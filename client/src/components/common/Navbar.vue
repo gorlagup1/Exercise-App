@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import $ from 'jquery';
+  //import $ from 'jquery';
   import auth from '../../auth'
 
   export default {
@@ -72,7 +72,8 @@
       userData() {
         return auth.getUser();
       },
-      profilePic() {  
+      profilePic() {
+        return "No pic yet";  
       },
     },
     methods: {

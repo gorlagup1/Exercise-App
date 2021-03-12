@@ -1,7 +1,7 @@
 <template>
   <div class="aligner">
     <div class="">
-    	<div class="row">
+      <div class="row">
         <h3>Oops! 404</h3>
         <p>
           This is not the web page you are looking for.
