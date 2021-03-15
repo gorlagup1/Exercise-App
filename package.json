@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-  "start": "node Server1/server.js"
+    "start": "node Server1/server.js"
   },
   "dependencies": {
     "atob": "^2.0.3",
