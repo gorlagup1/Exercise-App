@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  //import $ from 'jquery';
+  
   import auth from '../../auth'
 
   export default {
