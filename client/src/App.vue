@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -30,7 +30,7 @@
   };
   */
   export default {
-    
+    name: 'app',
   };
 
   // FIXME Please move the css to a seperate CSS File.
