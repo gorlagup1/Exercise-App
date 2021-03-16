@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-  /*global FB*/
+ 
+ /*//global FB*/
   // Load the SDK asynchronously
+
+  /*
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -25,9 +28,9 @@
       version: 'v2.6'
     });
   };
-
+  */
   export default {
-    name: 'app',
+    
   };
 
   // FIXME Please move the css to a seperate CSS File.
