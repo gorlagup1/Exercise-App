@@ -11,7 +11,7 @@ let pool = mysql.createPool({
 });
 */
 let pool = mysql.createPool({
-  host: process.env.DB_HOST || "sql5.freesqldatabase.com",
+  host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   connectionLimit: process.env.DB_POOL || 10,
