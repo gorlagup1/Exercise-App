@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 
+/*
 let pool = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
@@ -8,7 +9,7 @@ let pool = mysql.createPool({
   database: process.env.DB_NAME || "fitness_tracker_2",
   port:3306,
 });
-
+*/
 let pool = mysql.createPool({
   host: process.env.DB_HOST || "sql5.freesqldatabase.com",
   user: process.env.DB_USER || "root",
