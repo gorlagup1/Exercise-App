@@ -6,10 +6,9 @@
  http = require('http'),
  path = require('path');
  var cors = require('cors');
- var bodyParser = require("body-parser");
  var app = express();
  require('dotenv').config();
- app.use(cors());
+
  
  
  global.config = require('./config/config.json')
@@ -26,15 +25,16 @@
  /**
   * all environments.
   */
+  app.use(cors());
  app.set('port', process.env.PORT || 3006);
  app.set('views', __dirname + '/views');
  app.use(express.static(path.join(__dirname, '../vue-dist')));
  app.use(express.static(path.join(__dirname, 'public')));
- app.use(bodyParser.urlencoded({
+ app.use(express.urlencoded({
    extended: false
  }));
  
- app.use(bodyParser.json());
+ app.use(express.json());
  global.__basedir = __dirname;
  app.use(fileUpload());
  /**
