@@ -7,6 +7,8 @@ import VeeValidate from 'vee-validate'
 import toastr from 'toastr'
 import 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
+
+  
 import router from './router'
 import App from './App'
 import auth from './auth'

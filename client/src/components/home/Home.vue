@@ -23,7 +23,7 @@
               <button class="btn btn-success" v-on:click="likeStatus(item)">Like <span class="badge">{{item.like_count}}</span></button>
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" v-on:click.stop="openModalCommentStatus($event,item)">
-                Comment
+                Comme`nt
               </button>
               <button class="btn btn-danger" v-on:click="delStatus(item)" v-if="userData.id === item.user_id">Delete </button>
             </div>
