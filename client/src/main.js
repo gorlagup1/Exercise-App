@@ -43,5 +43,5 @@ new Vue({
     App,
   },
 
-}).$mount('app')
+}).$mount('#app')
 
