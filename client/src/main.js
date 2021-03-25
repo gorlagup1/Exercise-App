@@ -4,20 +4,13 @@ import 'font-awesome/css/font-awesome.css'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VeeValidate from 'vee-validate'
-const toastr = require('toastr')
-window.$ = window.jQuery = require('jquery')
-require('bootstrap')
-require('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')
-require('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')
-
-  
+import toastr from 'toastr'
+import 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
 import router from './router'
 import App from './App'
 import auth from './auth'
 import { API_HOST } from './api/urls'
-
-const paltformBrowse = require('../src/utils/platform-browser').default;
-window.$('body').addClass(paltformBrowse)
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
@@ -30,7 +23,6 @@ Vue.http.options.root = API_HOST;
 
 Vue.http.interceptors.push((request, next) => {
   request.headers.set('Authorization', auth.getAccessToken().AccessToken);
-
   next((response) => {
     if (response.status === 401 && router.currentRoute.name !== 'login') {
       // logout();
@@ -51,5 +43,5 @@ new Vue({
     App,
   },
 
-}).$mount('#app')
+}).$mount('app')
 
