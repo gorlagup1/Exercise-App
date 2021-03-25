@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  /*global FB*/
+  /*global FB*
   // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -25,7 +25,7 @@
       version: 'v2.6'
     });
   };
-
+*/
   export default {
     name: 'app',
   };
