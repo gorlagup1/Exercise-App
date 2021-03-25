@@ -75,22 +75,19 @@
     created() {
       console.log('created')
       this.userData = auth.getUser();
-      window.$('#dob').val(this.userData.dob);
       this.user.dob = this.userData.dob ;
       this.user.gender = this.userData.gender;
       this.user.name = this.userData.name;
       this.user.mobile = this.userData.mobile;
       this.user.id = this.userData.id
-    },
-    mounted() {
-      console.log('mounted')
-      window.$('#dateofbirth').datetimepicker({
-        format: 'MM/DD/YYYY',
-        // maxDate: new Date()
-      });
+      console.log(this.userData, this.user)
     },
     methods: {
-
+      formateDateToYYYYMMDD(date) {
+        if(!date) return null;
+        date = new Date(date)
+        return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + (date.getDate())).slice(-2)}`
+      },
       onFileSelection(id) {
       const input = window.document.getElementById(id);
       if (input.files[0].type.indexOf('image') !== -1) {
@@ -108,6 +105,7 @@
         auth.getCurrentUser()
         .then((data) => {
           self.userData = data;
+          self.user.dob = this.formateDateToYYYYMMDD(self.userData.dob)
         });
       })
       .catch((err) => {
@@ -121,6 +119,11 @@
         Vue.http.put('users', self.user)
         .then(() => {
           this.$toastr.success("Profile updated.");
+          auth.getCurrentUser()
+          .then((data) => {
+            self.userData = data;
+            self.user.dob = this.formateDateToYYYYMMDD(self.userData.dob)
+          });
         })
         .catch((err) => {
           this.$toastr.error(err, "Error while updating profile!");
@@ -135,7 +138,7 @@
           return null;
         }
       },
-    }
+ }
   };
 
 </script>
