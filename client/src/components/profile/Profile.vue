@@ -68,7 +68,6 @@
 					mobile: '',
         },
         API_HOST_URL : API_HOST,
-        defaultImage: '../../static/img/logo.jpg',
         userData:{}
       };
     },
