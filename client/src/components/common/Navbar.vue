@@ -72,19 +72,14 @@
       userData() {
         return auth.getUser();
       },
-      profilePic() {
-        return "No pic yet";  
-      },
     },
+    
     methods: {
       logout() {
         auth.logout();
         this.$router.push({
           name: 'Root',
         });
-      },
-      toggleSideBar() {
-        this.$emit('toggle-sidebar');
       },
     },
   };
