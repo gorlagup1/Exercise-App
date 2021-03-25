@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="">Date of Birth: {{selectedMember.dob}}</label>
                 </div>
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="">Gender: {{selectedMember.gender}}</label>
                 </div>
 						</div>
