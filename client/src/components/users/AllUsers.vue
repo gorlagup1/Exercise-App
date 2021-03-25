@@ -8,54 +8,25 @@
           </div>
           <div class="inline-block pr-50 pl-50">
             <h2>Fitness Tracker Members</h2>
-            <small>You can view details of Fitness Tracker's members.</small>
+            <small>You can view details of Fitness Tracker's members by serching member name or email.</small>
+            <div>
+              <vue-bootstrap-typeahead 
+                v-model="searchText"
+                :data="members"
+                :serializer="item => item.name"
+                @hit="openModalViewFriend($event)"
+                placeholder="Search member here..."
+              />
+            </div>          
           </div>
+          
         </div>
       </div>
       <div class="user-list">
-        <div class="item" v-for="(item,index) in friends" :key="index">
-          <div class="user-block">
-            <div class="name"><b>{{item.name}} </b></div>
-            <div class="add-btn">
-              <!-- Button trigger modal -->
-            <button type="button" class="btn black-color " data-toggle="modal" data-target="#myModal" v-on:click.stop="openModalViewFriend($event,item)">
-                View Member
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">{{selectedFriend.name}}' Profile</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <img class="img-friend" :src="selectedFriend.profile_picture" alt="">
-                </div>
-                <div class="form-group">
-                    <label for="">Name: {{selectedFriend.name}}</label>
-                </div>
-                <div class="form-group">
-                    <label for="">Mobile: {{selectedFriend.mobile}}</label>
-                </div>
-                <div class="form-group">
-                    <label for="">Date of Birth: {{selectedFriend.dob}}</label>
-                </div>
-                <div class="form-group">
-                    <label for="">Gender: {{selectedFriend.gender}}</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <modal-show-member v-if="modalShow" @close="modalShow = false" :selectedMember="selectedMember" :API_HOST_URL="API_HOST_URL">
+      </modal-show-member>      
     </div>
   </div>
 </template>
@@ -63,17 +34,35 @@
 <script>
 
 import Vue from 'vue';
-import auth from '../../auth'
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead';
+import { API_HOST } from '../../api/urls';
+import ModalShowMember from './modalShowMember';
 
 export default {
   name: 'friend-view',
+  components: {
+    VueBootstrapTypeahead,
+    ModalShowMember
+  },
+   watch: {
+    searchText(newQuery) {
+      Vue.http.get('friends', {params: {searchText:newQuery}})
+      .then((res) => {
+        console.log(res)
+        this.members = res.body.friends;
+      })
+    }
+  },
   data() {
     return {
+      modalShow: false,
       bgImg: {
         backgroundImage: `url(${require('@/assets/friends.jpg')})`
       },
-      friends: [],
-      selectedFriend: {
+      API_HOST_URL : API_HOST,
+      members: [],
+      searchText: '',
+      selectedMember: {
         name:'',
         gender:'',
         dob: '',
@@ -82,32 +71,10 @@ export default {
       }
     };
   },
-  created() {
-    this.getFriends();
-  },
-  computed: {
-    userData() {
-      return auth.getUser();
-    },
-  },
   methods: {
-    openModalViewFriend(e,user) {
-      e.preventDefault();
-      e.stopPropagation();
-
-        this.selectedFriend.name = user.name;
-        this.selectedFriend.mobile = user.mobile;
-        this.selectedFriend.gender = user.gender;
-        this.selectedFriend.profile_picture = user.profile_picture;
-        this.selectedFriend.dob = user.dob;
-        window.$('.modal').modal('show');
-    },
-    getFriends() {
-      var self = this;
-      Vue.http.get('friends',{params: {id:this.userData.id}})
-      .then((data) => {
-        self.friends = data.body.friends;
-      })
+    openModalViewFriend(member) {
+      this.selectedMember = member;
+      this.modalShow = true;
     },
   }
 };
@@ -115,7 +82,11 @@ export default {
 </script>
 
 <style>
-
+.img-style-modal {
+    width: 90px;
+    height: 90px;
+    margin: 10px auto !important; 
+  }
   .user-list {
     padding-top: 50px;
   }
