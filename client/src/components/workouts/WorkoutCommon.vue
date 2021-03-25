@@ -67,98 +67,20 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade black-color" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Workout-{{workoutTitle}} </h4>
-          </div>
-          <div class="modal-body">
-              <form  class="login_form">
-                <div class="form-group">
-                  <div class='input-group date' id='lastdate'>
-                    <input type='text' id="date1" class="form-control" placeholder="Start Date" />
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar" ></span>
-                    </span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class='input-group date' id='startdate'>
-                    <input type='text' id="date2" class="form-control" placeholder="Last Date" />
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar" ></span>
-                    </span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="time" class="form-control" v-model="workout.duration"
-                        placeholder="Duration" autofocus required>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control " v-model="workout.weight" placeholder="Weight"
-                        required autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control " v-model="workout.repeats" placeholder="Repeats"
-                        required autocomplete="off">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" v-on:click="AddWorout()">Save Workout</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <!-- Modal -->
-    <div class="modal fade black-color" id="myModalHisory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Workout History for {{workoutTitle}} </h4>
-          </div>
-          <div class="modal-body">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Last Date</th>
-                  <th scope="col">Duration(MM:SS)</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Repeats</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in historyData" :key="index">
-                  <th scope="row">{{index+1}}</th>
-                  <td>{{item.start_date}}</td>
-                  <td>{{item.last_date}}</td>
-                  <td>{{item.duration}}</td>
-                  <td>{{item.weight}}</td>
-                  <td>{{item.repeats}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+ <!-- Modal Add Workout-->
+    <modal-add-workout v-if="showModalAddWorkout" @close="showModalAddWorkout = false" @AddWorout="AddWorout()" :workoutTitle="workoutTitle" :workout="workout" />
+    
+    <!-- Modal show history-->
+    <modal-show-history v-if="showModalHistory" @close="showModalHistory = false" :workoutTitle="workoutTitle" :historyData="historyData" />
+ 
   </div>
 </template>
 
 <script>
   import Vue from 'vue';
   import auth from '../../auth'
+  import modalAddWorkout from '../../components/workouts/modalAddWorkout'
+  import modalShowHistory from '../../components/workouts/modalShowHistory'
   export default {
     name: 'workouts-common',
     props: ['bgImg','keyType', 'iconImg', 'workoutTitle'],
@@ -167,6 +89,8 @@
         key: this.$props.keyType,
         historyData:[],
         historyData2:[],
+        showModalAddWorkout:false,
+        showModalHistory: false,
         workout: {
           workout_type: this.$props.keyType,
           start_date: '',
@@ -178,6 +102,10 @@
         },
       };
     },
+    components: {
+      modalAddWorkout,
+      modalShowHistory    
+    },
     created() {
       this.getHisory(this.$props.keyType, 'onChange');
     },
@@ -186,16 +114,7 @@
         return auth.getUser();
       },
     },
-    mounted() {
-      window.$('#startdate').datetimepicker({
-        format: 'MM/DD/YYYY',
-        // maxDate: new Date()
-      });
-      window.$('#lastdate').datetimepicker({
-        format: 'MM/DD/YYYY',
-        // maxDate: new Date()
-      });
-    },
+    
     methods: {
       clearWorkout() {
         this.workout.start_date = ''
@@ -203,8 +122,8 @@
         this.workout.duration = ''
         this.workout.weight = ''
         this.workout.repeats = ''
-        window.$('#date1').val('')
-        window.$('#date2').val('')
+        document.getElementById('date1').value = ''
+        document.getElementById('date2').value = ''
       },
       onChange(event) {
         console.log(event.target.value)
@@ -212,6 +131,7 @@
       },
       getHisory(type, from='history') {
         console.log('workout_type', type, from)
+        
         var self = this;
         Vue.http.get('workouts', {params: {
           user_id: this.userData.id,
@@ -221,10 +141,11 @@
           if (from==='onChange') {
             self.historyData2 = data.body.workouts;
           } else {
+            this.showModalHistory=true;
             self.historyData = data.body.workouts;
           }
         }).catch((err) => {
-          window.$('.modal').modal('hide');
+          self.showModalAddWorkout = false;
           self.$toastr.error(err.body.message, err.statusText);
         });
       },
@@ -237,21 +158,23 @@
           return null;
         }
       },
+      
+
       AddWorout() {
         this.workout.start_date = this.isoDate('date1')
         this.workout.last_date = this.isoDate('date2')
         this.workout.user_id = this.userData.id;
 
         const self = this;
-
-        Vue.http.post('workout', self.workout)
+        console.log(this.workout)
+        Vue.http.post('workout', this.workout)
         .then(() => {
-          window.$('.modal').modal('hide');
+          self.showModalAddWorkout = false;
           self.$toastr.success("Workout added.");
           self.clearWorkout()
         })
         .catch((err) => {
-          window.$('.modal').modal('hide');
+          self.showModalAddWorkout = false;
           self.$toastr.error(err, "Error while updating workouts!");
         });
       }
@@ -263,4 +186,11 @@
   .width-200 {
     width : 200px;
   }
+  .modal-active{
+	display:block;
+}
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
 </style>
