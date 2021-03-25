@@ -39,46 +39,26 @@
       </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Exercise-Daily-Diet </h4>
-          </div>
-          <div class="modal-body">
-              <form  class="login_form">
-
-                <div class="form-group">
-                    <input type="text" class="form-control" v-model="exercise.food_name"
-                        placeholder="Food Name" autofocus required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control " v-model="exercise.ref_url" placeholder="Enter video or any reference URL"
-                        required >
-                </div>
-
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="AddExercise()">Add Exercise</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <modal-add-exercise v-if="modalShow" @close="modalShow = false" @AddExercise="AddExercise()" :exerciseTitle="exerciseTitle" :exercise="exercise" />
+</div>
+          
 </template>
 
 <script>
 
   import Vue from 'vue';
   import auth from '../../auth'
-
+  import modalAddExercise from './modalAddExercise'
+  
   export default {
     name: 'excersice-diet',
+    components: {
+      modalAddExercise
+    },
     data() {
       return {
+        exerciseTitle: 'Exercise-Daily-Diet',
+        modalShow: false,
         bgImg: {
           backgroundImage: `url(${require('@/assets/exercise/Balanced-Diet.jpg')})`
         },
@@ -121,12 +101,12 @@
         Vue.http.post('exercise', self.exercise)
         .then(() => {
           self.getHisory()
-          window.$('.modal').modal('hide');
+          this.modalShow = false;
           self.$toastr.success("exercise added.");
           self.clearExercise();
         })
         .catch((err) => { 
-          window.$('.modal').modal('hide');
+          this.modalShow = false;
           self.$toastr.error(err, "Error while updating workouts!");
         });
       }
