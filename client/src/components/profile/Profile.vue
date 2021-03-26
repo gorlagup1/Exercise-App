@@ -5,7 +5,7 @@
         <h2 class="panel_head black-color">Setting</h2>
         <form >
           <div class="form-group">
-            <img class="img-style " v-if="!userData.profile_picture" src="../../assets/user.jpg">
+            <img class="img-style " v-if="!userData.profile_picture" :src="defaultImage">
             <img class="img-style " :src="API_HOST_URL+userData.profile_picture" v-else>
             <label class="btn-bs-file btn btn-md btn-block">
               Upload Picture
@@ -24,13 +24,13 @@
 
           <div class="form-group">
               <div class='input-group date' id='dateofbirth'>
-                  <input type='date' id="dob" v-model="user.dob" class="form-control" placeholder="Date of Birth" />
+                  <input type='text' id="dob" class="form-control" placeholder="Date of Birth" />
                   <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar" ></span>
                   </span>
               </div>
             </div>
-            <div class="form-group black-color">
+            <div class="form-group">
                 Gender :
               <label class="radio-inline" >
                 
@@ -74,7 +74,7 @@
     created() {
       console.log('created')
       this.userData = auth.getUser();
-      this.user.dob = this.formateDateToYYYYMMDD(this.userData.dob) ;
+      this.user.dob = this.userData.dob ;
       this.user.gender = this.userData.gender;
       this.user.name = this.userData.name;
       this.user.mobile = this.userData.mobile;

@@ -9,9 +9,9 @@
 
 <script>
 import Navbar from './Navbar';
-import auth from '../../auth';
 
-export default {
+
+export default {  
   name: 'dashboard',
   created() {
     // const token = localStorage.getItem('id_token');

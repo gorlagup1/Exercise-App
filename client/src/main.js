@@ -13,7 +13,6 @@ import router from './router'
 import App from './App'
 import auth from './auth'
 import { API_HOST } from './api/urls'
-const paltformBrowse = require('../src/utils/platform-browser').default;
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
