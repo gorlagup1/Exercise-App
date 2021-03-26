@@ -9,7 +9,7 @@
                 <div class="center-text p-20">
           <h2 class="pb-15"><strong>Exercise-Fat To Fit</strong></h2>
 
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >
+          <button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="modalShow=true" >
                 Add Exercise
               </button>
 
