@@ -13,7 +13,7 @@
     <div class="row">
       <div class="content2">
         <div class="inline-block pr-50 pl-50">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >
+          <button type="button" class="btn btn-primary" data-toggle="modal" v-on:click="showModalAddWorkout=true" >
             Add Workout
           </button>
         </div>
