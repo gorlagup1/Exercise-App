@@ -5,7 +5,7 @@
         <h2 class="panel_head black-color">Setting</h2>
         <form >
           <div class="form-group">
-            <img class="img-style " v-if="!userData.profile_picture" src="../../assets/user.jpg">
+            <img class="img-style " v-if="!userData.profile_picture" :src="defaultImage">
             <img class="img-style " :src="API_HOST_URL+userData.profile_picture" v-else>
             <label class="btn-bs-file btn btn-md btn-block">
               Upload Picture
