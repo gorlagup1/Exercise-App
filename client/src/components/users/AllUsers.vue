@@ -105,7 +105,7 @@ export default {
   }
   .img-friend{
     width: 100px;
-    height: 100px;
+    height: 100px;  
   }
 </style>
 
