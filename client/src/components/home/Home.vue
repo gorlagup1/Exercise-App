@@ -6,7 +6,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Status:</span>
-                  <textarea class="form-control" id="" rows="3" v-model="status.status_title" placeholder="Write your status..." ></textarea>
+                  <textarea class="form-control" id="" rows="3" v-model="status.status_title" placeholder="Write your status Here ..." ></textarea>
               </div>
           </div>
         <button class="btn btn-outline-success post-btn"  v-on:click="addStatus()">Post</button>
@@ -22,7 +22,7 @@
             <div class="text-right position-relative">
               <button class="btn btn-success" v-on:click="likeStatus(item)">Like <span class="badge">{{item.like_count}}</span></button>
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" v-on:click.stop="openModalCommentStatus($event,item)">
+              <button type="button" class="btn btn-primary" data-toggle="modal"  v-on:click.stop="openModalCommentStatus($event,item)">
                 Comment
               </button>
               <button class="btn btn-danger" v-on:click="delStatus(item)" v-if="userData.id === item.user_id">Delete </button>
@@ -46,7 +46,8 @@
       </div>
     </div>
     <!-- Modal -->
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <modal-add-comment v-if="modalShow" @close="modalShow = false" @commentStatus="commentStatus()" :statusComment="statusComment" :comment="comment" />
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -68,20 +69,22 @@
       </div>
     </div>
   </div>
-</template>
-    
-  </div>
+
 </template>
 
 <script>
 import Vue from 'vue';
 import auth from '../../auth'
-
+import modalAddComment from './modalAddComment'
 
 export default {
   name: 'home-view',
+  components: {
+      modalAddComment
+    },
   data() {
     return {
+      modalShow: false,
       status: {
         status_title: '',
         user_id: '',
@@ -137,27 +140,28 @@ export default {
     openModalCommentStatus(e,status) {
       e.preventDefault();
       e.stopPropagation();
+      
 
         this.statusComment.status_title = status.status_title;
         this.comment.status_id = status.id;
         this.comment.user_id = this.userData.id;
-        window.$('.modal').modal('show');
+        this.modalShow = true;
     },
     commentStatus() {
       const self =this;
         if (this.comment.comment_title !=='') {
           Vue.http.post('comments', self.comment)
           .then(() => {
-            window.$('.modal').modal('hide');
+            this.modalShow = false;
             self.getStatus();
             self.$toastr.success("Commented on status.");
           })
           .catch((err) => {
-            window.$('.modal').modal('hide');
+            this.modalShow = false;
             self.$toastr.error(err, "Error while comment on status!");
           });
         } else {
-          window.$('.modal').modal('hide');
+          this.modalShow = false;
           self.$toastr.error('Comment should not blank!', "Empty Comment!");
         }
 
