@@ -30,7 +30,7 @@
   
  app.set('port', process.env.PORT || 3006);
  app.set('views', __dirname + '/views');
- app.use(express.static(path.join(__dirname, '../vue-dist'))); 
+ app.use(express.static(path.join(__dirname, '../vue-dist')));  
  app.use(express.static(path.join(__dirname, 'public')));
  app.use(bodyParser.urlencoded({
    extended: false
