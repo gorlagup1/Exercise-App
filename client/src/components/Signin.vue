@@ -1,4 +1,4 @@
-<!--  SignIn.vue -->
+<!--  Signin.vue -->
 <template>
 	<div class="container" :style="bgImg">
     <landingnavbar />
