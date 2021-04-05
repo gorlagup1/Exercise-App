@@ -59,7 +59,7 @@ export default {
       })
       .catch((err) => {
         console.log("login----------errr", err)
-        if (err.body && err.body.results.message) { 
+        if (err.body && err.body.results.msg) {
           reject(err.body.message);
         } else {
           reject('Unable to login');
