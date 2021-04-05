@@ -3,8 +3,8 @@
  */
 
  const jwt = require('jsonwebtoken');
- const atob = require('atob');
- const Cryptr = require('cryptr'),
+ const atob = require('btoa');
+ const cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);
  
  exports.register = (req, res) => {
