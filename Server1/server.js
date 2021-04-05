@@ -45,6 +45,12 @@
  
  app.use('/',user);
  app.use('/',index);
+
+ app.use((error, req, res, next)=>{
+   console.error(error);
+   res.status(error.code || 500);
+   res.send( error.msg ? { msg: error.msg } : error)
+ })
  
  /**
   * creating server.

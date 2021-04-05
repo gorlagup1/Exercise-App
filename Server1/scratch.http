@@ -1,0 +1,5 @@
+
+
+POST https://fittnesss-app.herokuapp.com/login
+
+{"email":"uma@gmail.com","password":"uma@1997"}
