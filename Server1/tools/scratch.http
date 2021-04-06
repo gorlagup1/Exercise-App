@@ -1,0 +1,8 @@
+
+POST http://fittnesss-app.herokuapp.com/
+
+POST http://fittnesss-app.herokuapp.com/fittnesss-app.herokuapp.com/users/login
+{
+"Email": "uma@gmail.com",
+"password":"uma@1997"
+}
