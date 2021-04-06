@@ -4,7 +4,7 @@
 
  const jwt = require('jsonwebtoken'); 
  /*const bcrypt = require('bcryptjs');
- const SECRET_KEY = "secretkey23456"; */ 
+ const SECRET_KEY = "secretkey23456";  */
  const atob = require('atob');
  const Cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);
