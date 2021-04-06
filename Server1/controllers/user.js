@@ -2,13 +2,13 @@
  * Module dependencies.
  */
 
- const jwt = require('jsonwebtoken');
+ const jwt = require('jsonwebtoken');   
  const atob = require('atob');
  const Cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);
  
  exports.register = (req, res) => {
-   let decPass = atob(req.body.password);
+   let decPass = atob(req.body.password);  
    let encryptedPass = cryptr.encrypt(decPass);
    let sql = "INSERT INTO `users`(`name`,`mobile`,`email`,`password`) VALUES ('" + req.body.name + "','" + req.body.mobile + "','" + req.body.email + "','" + encryptedPass + "')";
  
