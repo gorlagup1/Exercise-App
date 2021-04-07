@@ -39,7 +39,7 @@
    var email = req.body.email;
    var sql = "SELECT id, name, mobile, dob, gender, email, profile_picture FROM `users` WHERE `email`='" + email + "'";
  
-   connection.query(sql, function (err, result) {
+   connection.query(sql, function (err, results) {
  
      if (results != "") {
        jwtLogin(res, err, results);
