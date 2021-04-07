@@ -11,7 +11,7 @@
  
  exports.register = (req, res) => {
    let decPass = atob(req.body.password);  
-   let encryptedPass = cryptr.encrypt(decPass);
+   let encrypted_Pass = cryptr.encrypt(dec_Pass);
    let sql = "INSERT INTO `users`(`name`,`mobile`,`email`,`password`) VALUES ('" + req.body.name + "','" + req.body.mobile + "','" + req.body.email + "','" + encryptedPass + "')";
  
    connection.query(sql, function (err, result) {
