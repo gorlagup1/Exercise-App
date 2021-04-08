@@ -37,7 +37,7 @@
  };*/
  
  //---------------------------------------login services----------------------------------------------------------
- exports.login =async (req, res) => {
+ exports.login =async (email,password) => {
   try{
     const {email, password} = req.body;
     const users = await db('users').name("*").where({email:email});

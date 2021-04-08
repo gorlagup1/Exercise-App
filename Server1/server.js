@@ -39,6 +39,14 @@
  app.use(bodyParser.json());
  global.__basedir = __dirname;
  app.use(fileUpload());
+
+
+ app.use(async (req, res, next)=>{ 
+        
+  const token = req.headers.authorization?.split(' ')[1];
+  req.user = token && await usersRoute.FromJWT(token);
+  next();
+}) 
  /**
   * routes.
   */
