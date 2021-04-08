@@ -3,14 +3,26 @@
  */
 
  const jwt = require('jsonwebtoken'); 
- /*const bcrypt = require('bcryptjs');
- const SECRET_KEY = "secretkey23456";  */
- const atob = require('atob');
- const Cryptr = require('cryptr'),
- cryptr = new Cryptr(config.CRYPTOKEY);
- 
- exports.register = (req, res) => {
-   let decPass = atob(req.body.password);  
+ const bcrypt = require('bcrypt');
+ /*const SECRET_KEY = "secretkey23456";  */
+ /*const atob = require('atob');*/
+ const { hasBrowserCrypto } = require('google-auth-library/build/src/crypto/crypto');
+ /*const Cryptr = require('cryptr'),
+ cryptr = new Cryptr(config.CRYPTOKEY);*/
+  
+ exports.register = async(req, res) => {
+   try{
+     const {email, password} = req.body;
+     const hash = await hasBrowserCrypto.hash(password, 10);
+     await db('users').insert({email:email, hash:hash});
+     res.status(200).json("All good!");
+   } catch(e){
+     console.log(e);
+     res.status(500).send('something broke');
+    
+   }
+   };
+   /*let decPass = atob(req.body.password);  
    let encrypted_Pass = cryptr.encrypt(dec_Pass);
    let sql = "INSERT INTO `users`(`name`,`mobile`,`email`,`password`) VALUES ('" + req.body.name + "','" + req.body.mobile + "','" + req.body.email + "','" + encryptedPass + "')";
  
@@ -22,18 +34,38 @@
        res.status(200).send(result);
      }
    });
- };
+ };*/
  
  //---------------------------------------login services----------------------------------------------------------
- exports.login = function (req, res) {
-   var dec_pass = atob(req.body.password);
+ exports.login =async (req, res) => {
+  try{
+    const {email, password} = req.body;
+    const users = await db('users').name("*").where({email:email});
+    if(user){
+      const validPass = await bcrypt.compare(password, users.hash);
+      if(validPass){
+        res.status(200).json("valid email and pass!");
+      }else{
+        res.json("wrong pass!");
+      }
+    }else{
+      res.status(404).json('user not found');
+    }
+   } catch(e){
+      console.log(e);
+      res.status.send('something broke!');
+      
+    }
+};
+     
+   /*var dec_pass = atob(req.body.password);
    var encrypted_pass = cryptr.encrypt(dec_pass);
    var sql = "SELECT id, name, mobile, dob, gender, email, profile_picture FROM `users` WHERE `email`='" + req.body.email + "' AND password = '" + encrypted_pass + "'";
  
    connection.query(sql, function (err, results) {
      jwtLogin(res, err, results);
    });
- };
+ };*/
  exports.socialLogin = function (req, res) {
    console.log(req.body)
    var email = req.body.email;
