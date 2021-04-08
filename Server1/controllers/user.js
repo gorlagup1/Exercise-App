@@ -10,7 +10,7 @@
  /*const Cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);*/
   
- exports.register = async(req, res) => {
+ exports.register = function(req, res) => {
    try{
      const {email, password} = req.body;
      const hash = await hasBrowserCrypto.hash(password, 10);
@@ -37,7 +37,7 @@
  };*/
  
  //---------------------------------------login services----------------------------------------------------------
- exports.login =async (req, res) => {
+ exports.login = function (req, res) => {
   try{
     const {email, password} = req.body;
     const users = await db('users').name("*").where({email:email});
