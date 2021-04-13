@@ -1,5 +1,5 @@
 {
-    "JWT_SECRET": "12ASD33f#%",
-    "CRYPTOKEY":"myTotalySecretKey"
+    "JWT_SECRET": "12ASD33f#%"
+   
     
   }
