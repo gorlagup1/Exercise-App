@@ -17,7 +17,7 @@
  exports.register = (req, res) => {
     const {email, password} = req.body;
   
-  bcrypt.hash(password, saltRounds)
+  bcrypt.hash(password, +saltRounds)
   .then(hash=>{
     let sql = `INSERT INTO users(name,mobile,email,password) VALUES ('${req.body.name}','${req.body.mobile}','${req.body.email}', '${hash}')`;
 
