@@ -7,6 +7,7 @@
  /*const SECRET_KEY = "secretkey23456";  */
  /*const atob = require('atob');*/
  const saltRounds = process.env.saltRounds;  
+ const JWT_SECRET = process.env.JWT_SECRET;
  /*const Cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);*/
  
