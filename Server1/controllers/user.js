@@ -1,27 +1,45 @@
 /**
- * Module dependencies.
+ * Module dependencies.   
  */
 
  const jwt = require('jsonwebtoken'); 
  const bcrypt = require('bcrypt');
  /*const SECRET_KEY = "secretkey23456";  */
  /*const atob = require('atob');*/
- const { hasBrowserCrypto } = require('google-auth-library/build/src/crypto/crypto');
+ const saltRounds = process.env.saltRounds;  
  /*const Cryptr = require('cryptr'),
  cryptr = new Cryptr(config.CRYPTOKEY);*/
+ 
+ 
+ 
+ //-------------------------------------Register service----------------------------------- //
+ exports.register = (req, res) => {
+    const {email, password} = req.body;
   
- exports.register = async(req, res) => {
-   try{
-     const {email, password} = req.body;
-     const hash = await hasBrowserCrypto.hash(password, 10);
-     await db('users').insert({email:email, hash:hash});
-     res.status(200).json("All good!");
-   } catch(e){
-     console.log(e);
-     res.status(500).send('something broke');
+  bcrypt.hash(password, saltRounds)
+  .then(hash=>{
+    let sql = `INSERT INTO users(name,mobile,email,password) VALUES ('${req.body.name}','${req.body.mobile}','${req.body.email}', '${hash}')`;
+
+    connection.query(sql, function (err, result) {
+        if (err) {
+          console.log('Error', err)
+          res.status(500).send(err);  
+        } else {
+          res.status(200).send(result);
+        }
+      });
+  })
+   
+
+   
+     
+     //await connection('user').insert({email:email, hash:hash});
+
+  
     
-   }
-   };
+  
+
+ 
    /*let decPass = atob(req.body.password);  
    let encrypted_Pass = cryptr.encrypt(dec_Pass);
    let sql = "INSERT INTO `users`(`name`,`mobile`,`email`,`password`) VALUES ('" + req.body.name + "','" + req.body.mobile + "','" + req.body.email + "','" + encryptedPass + "')";
@@ -35,22 +53,28 @@
      }
    });
  };*/
- 
+
+ }
  //---------------------------------------login services----------------------------------------------------------
- exports.login =async (req, res) => {
+ exports.login = (req, res) => {
   try{
     const {email, password} = req.body;
-    const users = await db('users').name("*").where({email:email});
-    if(user){
-      const validPass = await bcrypt.compare(password, users.hash);
-      if(validPass){
-        res.status(200).json("valid email and pass!");
+    var sql = "SELECT id, name, mobile, dob, gender, email, password, profile_picture FROM `users` WHERE `email`='" + req.body.email + "'";
+ 
+    connection.query(sql, async function (err, results) {
+      //jwtLogin(res, err, results);
+      if(results.length){
+        const user = results[0]
+        const validPass = await bcrypt.compare(password, user.password);
+        if(validPass){
+          res.status(200).json("valid email and pass!");
+        }else{
+          res.json("wrong pass!");
+        }
       }else{
-        res.json("wrong pass!");
+        res.status(404).json('user not found');
       }
-    }else{
-      res.status(404).json('user not found');
-    }
+    });
    } catch(e){
       console.log(e);
       res.status.send('something broke!');
@@ -226,4 +250,4 @@
      });
      res.end();
    }
- }
+  }
