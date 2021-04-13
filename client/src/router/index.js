@@ -77,7 +77,7 @@ export default new Router({
     {
       path: '/dashboard/exercise-daily-diet',
       name: 'ExerciseDailyDietView',
-      component: ExerciseeDailyDiet,
+      component: ExerciseDailyDiet,
     },
     {
       path: '/dashboard/exercise-fat-to-fit',
