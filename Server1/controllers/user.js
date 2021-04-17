@@ -17,14 +17,14 @@
  exports.register = (req, res) => {
     const {email, password} = req.body;
   
-  bcrypt.hash(password, +saltRounds)
-  .then(hash=>{
+  bcrypt.hashsync(password, +saltRounds)
+  .then(hashsync=>{    
     let sql = `INSERT INTO users(name,mobile,email,password) VALUES ('${req.body.name}','${req.body.mobile}','${req.body.email}', '${hash}')`;
 
     connection.query(sql, function (err, result) {
         if (err) {
-          console.log('Error', err)
-          res.status(500).send(err);  
+          console.log('Error', err)   
+          res.status(500).send(err);    
         } else {
           res.status(200).send(result);
         }
