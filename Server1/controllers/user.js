@@ -63,7 +63,7 @@
     var sql = "SELECT id, name, mobile, dob, gender, email, password, profile_picture FROM `users` WHERE `email`='" + req.body.email + "'";
  
     connection.query(sql, async function (err, results) {
-      //jwtLogin(res, err, results);
+      jwtLogin(res, err, results);
       if(results.length){
         const user = results[0]
         const validPass = await bcrypt.compare(password, user.password);
