@@ -21,7 +21,7 @@
   .then(hash=>{    
     let sql = `INSERT INTO users(name,mobile,email,password) VALUES ('${req.body.name}','${req.body.mobile}','${req.body.email}', '${hash}')`;
 
-    connection.query(sql, function (err, result) {
+    connection.query(sql, async function (err, result) {
         if (err) {
           console.log('Error', err)   
           res.status(500).send(err);    
