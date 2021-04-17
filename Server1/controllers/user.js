@@ -17,8 +17,8 @@
  exports.register = (req, res) => {
     const {email, password} = req.body;
   
-  bcrypt.hashsync(password, +saltRounds)
-  .then(hashsync=>{    
+  bcrypt.hash(password, +saltRounds)
+  .then(hash=>{    
     let sql = `INSERT INTO users(name,mobile,email,password) VALUES ('${req.body.name}','${req.body.mobile}','${req.body.email}', '${hash}')`;
 
     connection.query(sql, function (err, result) {
