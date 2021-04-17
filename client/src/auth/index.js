@@ -58,7 +58,7 @@ export default {
         }
       })
       .catch((err) => {
-        console.log("login----------errr", err)
+        console.log("login----------err", err)
         if (err.body && err.body.results.msg) {
           reject(err.body.message);
         } else {
@@ -76,7 +76,7 @@ export default {
         resolve(data.body.data);
       })
       .catch((err) => {
-        console.log("login----------errr", err)
+        console.log("login----------err", err)
         if (err.body && err.body.msg) {
           reject(err.body.message);
         } else {
