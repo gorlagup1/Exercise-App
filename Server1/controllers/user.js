@@ -14,7 +14,7 @@
  
  
  //-------------------------------------Register service----------------------------------- //
- exports.register = (req, res) => {
+ exports.register = (req, res, next) => {
     const {email, password} = req.body;
   
   bcrypt.hash(password, +saltRounds)
@@ -29,7 +29,7 @@
           res.status(200).send(result);
         }
       });
-  })
+  }).catch(err=> next(err))
    
 
    
