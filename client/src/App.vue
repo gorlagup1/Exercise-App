@@ -2,6 +2,9 @@
   <div id="app">
     <router-view/>
   </div>
+
+ 
+
 </template>
 
 <script>
@@ -9,6 +12,28 @@
   export default {
     name: 'app',
   };
+
+  /*global fb*/
+         window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '509660520411411',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v10.0'
+          });
+      
+          FB.AppEvents.logPageView();   
+      
+        }; 
+
+        (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_US/sdk.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
 
   // FIXME Please move the css to a seperate CSS File.
   // It seems the css written below is not plain css, but LESS or PostCSS
