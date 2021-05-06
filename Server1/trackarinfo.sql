@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS friends
 id INT  NOT NULL AUTO_INCREMENT,
 friend_id INT,
 user_id INT,
-PRIMARY KEY(id),
 FOREIGN KEY(friend_id) REFERENCES users(id),
 FOREIGN KEY(user_id) REFERENCES users(id)
 );

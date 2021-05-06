@@ -38,6 +38,24 @@
           </table>
       </div>
     </div>
+    <template>
+    <section>
+        <p class="content"><b>Selected:</b> {{ selected }}</p>
+        <b-field label="Enter value to check">
+            <b-autocomplete
+                rounded
+                v-model="enter"
+                :data="filteredDataArray"
+                placeholder="e.g. Exercise value"
+                icon="magnify"
+                clearable
+                @select="option => selected = option">
+                <template slot="empty">No results found</template>
+            </b-autocomplete>
+        </b-field>
+    </section>
+</template>
+
     <!-- Modal -->
     <modal-add-exercise v-if="modalShow" @close="modalShow = false" @AddExercise="AddExercise()" :exerciseTitle="exerciseTitle" :exercise="exercise" />
 </div>
@@ -45,13 +63,55 @@
 </template>
 
 <script>
-
+  import exercise from '../DailyDiet/exercise'
   import Vue from 'vue';
   import auth from '../../auth'
   import modalAddExercise from './modalAddExercise'
   
   export default {
-    name: 'excersice-diet',
+    created(){
+      exercise.Init();
+    }
+    data(){
+      return{
+        value: exercise.state.exercise,
+        text: exercise.state.exercise,
+        enter: exercise.state.exercise,
+        name:"",
+        selected:null
+      };
+    },
+    }
+
+    methods:{
+      async add(value){
+        try{
+          await add(this.value);
+        }
+        catch(error){
+          this.error = error;
+        }
+      },
+      async get(){
+        await get(this.user_id);
+
+      },
+      async getValues(){
+        await getValues(this.enter);
+      }
+        },
+        computed: {
+          filteredDataArray(){
+            return tis.enter.filter(option)=>{
+              return option .toString()
+              .toLowerCase()
+              .indexOf(this.name.toLowerCase())>=0
+
+            }}
+          }
+      
+      
+    /*name: 'excersice-diet',
     components: {
       modalAddExercise
     },
@@ -111,5 +171,5 @@
         });
       }
     }
-  };
+  };*/
 </script>

@@ -7,8 +7,8 @@ import VeeValidate from 'vee-validate'
 import toastr from 'toastr'
 import 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
-
-  
+/* added import buefy here*/
+import buefy from 'buefy'  
 import router from './router'
 import App from './App'
 import auth from './auth'
@@ -16,6 +16,7 @@ import { API_HOST } from './api/urls'
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
+Vue.use(buefy);/*added vue buefy after importing for autocomplete textbox*/
 Vue.use(VeeValidate);
 Vue.prototype.$toastr = toastr;
 
