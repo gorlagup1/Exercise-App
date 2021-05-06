@@ -8,8 +8,8 @@ exports.createExercise = function (req, res) {
         res.status(200).send(result);
       }
     });
-  }
-  function get(){
+  }/* commented for autoboxing */
+ /* function get(){
     return exercise;
   }
   function add(exercise){
@@ -39,7 +39,7 @@ exports.createExercise = function (req, res) {
 
 module.exports = {
     exercise, exerciseLog, get, add,  getUserData, getValues
-}
+}*/
   
   exports.getAllExercises = function (req, res) {
     var sql = 'SELECT * FROM `exercises` WHERE user_id = ? AND exercise_type = ?';
